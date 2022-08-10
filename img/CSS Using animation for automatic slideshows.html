@@ -1,0 +1,1076 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Editors & translators, please, edit Overview.en.tmpl, not .html -->
+<html lang="en-us"><head profile="http://microformats.org/profile/hcard">
+  <title>CSS: Using animation for automatic slideshows</title>
+
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+  <meta content="width=device-width" name="viewport">
+  <link href="CSS%20Using%20animation%20for%20automatic%20slideshows_fichiers/main.css" media="screen, handheld, projection, tv" rel="stylesheet" title="Main">
+  <link href="CSS%20Using%20animation%20for%20automatic%20slideshows_fichiers/floatspan-n.css" media="screen, handheld, projection, tv" rel="alternate stylesheet" title="Cascade">
+  <link href="CSS%20Using%20animation%20for%20automatic%20slideshows_fichiers/daily-color.css" media="screen, handheld, projection, tv" rel="alternate stylesheet" title="Cascade">
+  <link href="CSS%20Using%20animation%20for%20automatic%20slideshows_fichiers/floatspan.css" media="screen, handheld, projection, tv" rel="alternate stylesheet" title="Cascade (older browsers)">
+  <link href="CSS%20Using%20animation%20for%20automatic%20slideshows_fichiers/daily-color.css" media="screen, handheld, projection, tv" rel="alternate stylesheet" title="Cascade (older browsers)">
+  <link href="CSS%20Using%20animation%20for%20automatic%20slideshows_fichiers/asymmetric.css" media="screen, handheld, projection, tv" rel="alternate stylesheet" title="Asymmetric">
+  <link href="CSS%20Using%20animation%20for%20automatic%20slideshows_fichiers/draft.css" media="screen, projection, tv" rel="alternate stylesheet" title="Draft 3">
+  <link href="CSS%20Using%20animation%20for%20automatic%20slideshows_fichiers/draft-rg.css" media="screen, projection, tv" rel="alternate stylesheet" title="Draft 2">
+  <link href="CSS%20Using%20animation%20for%20automatic%20slideshows_fichiers/twocolumn-print.css" media="print" rel="stylesheet">
+  <link href="https://www.w3.org/" rel="home" title="W3C">
+  <link href="https://www.w3.org/Style/CSS/" rel="top" title="CSS">
+  <link href="https://www.w3.org/Style/CSS/current-work" rel="chapter" title="Roadmap">
+  <link href="https://www.w3.org/Style/Examples/007/" rel="chapter" title="Examples">
+  <link href="https://www.w3.org/Consortium/activities" rel="bookmark" title="Activities">
+  <link href="https://www.w3.org/TR/" rel="bookmark" title="Tech.&nbsp;reports">
+  <link href="https://www.w3.org/Consortium/Translation/" rel="bookmark" title="Translations">
+  <link href="https://www.w3.org/Status" rel="bookmark" title="Software">
+  <link href="https://www.w3.org/Consortium/siteindex" rel="index" title="Site&nbsp;index">
+  <link href="https://www.w3.org/Style/CSS/opensearch.xml" rel="search" title="Search W3C" type="application/opensearchdescription+xml">
+  <link href="https://www.w3.org/Help/search" rel="search" title="Search W3C" type="text/html">
+  <link href="https://www.w3.org/Consortium/Legal/ipr-notice.html#Copyright" rel="copyright" title="Copyright">
+  <link href="https://www.w3.org/Style/Examples/007/slideshow.en.html" rel="canonical">
+  <style type="text/css">
+   /* Toggling 'visibility'; abspos to put the slides in the same place.
+      Requires a known maximum height for slides.
+      Requires knowing the number of slides.
+      All slides are animated individually.
+      No transition effect.
+   */
+   #pause1, #pause1 ~ * [for=pause1] {display: none}
+   @supports (animation-delay: 4s) {
+     #pause1 ~ * [for=pause1] {display: inline}
+     #pause1 ~ * [for=pause1] .paused {display: none}
+     #pause1 ~ * [for=pause1] .running {display: inline}
+     #pause1:checked ~ * [for=pause1] .paused {display: inline}
+     #pause1:checked ~ * [for=pause1] .running {display: none}
+     #pause1:checked ~ #slideset1 > * {animation-play-state: paused}
+     #slideset1 {height: 10em; position: relative}
+     #slideset1 > * {visibility: hidden; animation: 12s autoplay1 infinite;
+       position: absolute; top: 0; left: 0}
+     #slideset1 > *:nth-child(1) {animation-delay: 0s}
+     #slideset1 > *:nth-child(2) {animation-delay: 4s}
+     #slideset1 > *:nth-child(3) {animation-delay: 8s}
+     @keyframes autoplay1 {
+       0% {visibility: visible}
+       33.33% {visibility: hidden}
+     }
+     #pause1:checked ~ * [for=pause1] .timer {animation-play-state: paused}
+   }
+
+   /* Abspos with moving effect.
+      Requires a known maximum for slides.
+      Requires knowing the number of slides.
+      All slides are animated individually.
+      With transition effect.
+   */
+   #pause2, #pause2 ~ * [for=pause2] {display: none}
+   @supports (animation-delay: 4s) {
+     #pause2 ~ * [for=pause2] {display: inline}
+     #pause2 ~ * [for=pause2] .paused {display: none}
+     #pause2 ~ * [for=pause2] .running {display: inline}
+     #pause2:checked ~ * [for=pause2] .paused {display: inline}
+     #pause2:checked ~ * [for=pause2] .running {display: none}
+     #pause2:checked ~ #slideset2 > * {animation-play-state: paused}
+     #slideset2 {height: 10em; position: relative; overflow: hidden}
+     #slideset2 > * {animation: 12s autoplay2 infinite ease-in-out;
+       position: absolute; top: 100%; left: 0}
+     #slideset2 > *:nth-child(1) {animation-delay: 0s}
+     #slideset2 > *:nth-child(2) {animation-delay: 4s}
+     #slideset2 > *:nth-child(3) {animation-delay: 8s}
+     @keyframes autoplay2 {
+       0% {top: 100%}      /* Move from below the frame... */
+       4% {top: 0%}        /* ... to the top of the frame. */
+       33.33% {top: 0%}    /* Move from the top of the frame... */
+       37.33% {top: -100%} /* ... to above the frame. */
+       100% {top: -100%}
+     }
+     #pause2:checked ~ * [for=pause2] .timer {animation-play-state: paused}
+   }
+
+   /* Move first slide only (margin-top); hide with 'overflow: hidden'.
+      Requires a known, identical height for all slides.
+      Requires knowing the number of slides.
+      Only the first slide is animated.
+      With transition effect.
+      This works in Opera 12.
+   */
+   #pause3, #pause3 ~ * [for=pause3] {display: none}
+   @supports (animation-play-state: paused) {
+     #pause3 ~ * [for=pause3] {display: inline}
+     #pause3 ~ * [for=pause3] .paused {display: none}
+     #pause3 ~ * [for=pause3] .running {display: inline}
+     #pause3:checked ~ * [for=pause3] .paused {display: inline}
+     #pause3:checked ~ * [for=pause3] .running {display: none}
+     #pause3:checked ~ #slideset3 > * {animation-play-state: paused}
+     #slideset3 {height: 10em; position: relative; overflow: hidden}
+     #slideset3 > * {height: 100%; box-sizing: border-box; overflow: hidden}
+     #slideset3 > *:first-child {animation: 12s autoplay3 infinite ease-in-out}
+     @keyframes autoplay3 {
+       0% {margin-top: 10em}
+       4% {margin-top: 0em}
+       31% {margin-top: 0em}
+       35% {margin-top: -10em}
+       64% {margin-top: -10em}
+       68% {margin-top: -20em}
+       96% {margin-top: -20em}
+       100% {margin-top: -30em}
+     }
+     #pause3:checked ~ * [for=pause3] .timer {animation-play-state: paused}
+   }
+
+   /* Toggle height of slides between 0 and auto.
+      Does not require a known height for slides.
+      Requires knowing the number of slides.
+      All slides are animated individually.
+      Requires that slides have no padding or border.
+      No transition effect.
+   */
+   #pause4, #pause4 ~ * [for=pause4] {display: none}
+   @supports (animation-delay: 4s) {
+     #pause4 ~ * [for=pause4] {display: inline}
+     #pause4 ~ * [for=pause4] .paused {display: none}
+     #pause4 ~ * [for=pause4] .running {display: inline}
+     #pause4:checked ~ * [for=pause4] .paused {display: inline}
+     #pause4:checked ~ * [for=pause4] .running {display: none}
+     #pause4:checked ~ #slideset4 > * {animation-play-state: paused}
+     #slideset4 > * {animation: 12s autoplay4 infinite; overflow: hidden}
+     #slideset4 > *:nth-child(1) {animation-delay: 0s}
+     #slideset4 > *:nth-child(2) {animation-delay: -8s}
+     #slideset4 > *:nth-child(3) {animation-delay: -4s}
+     @keyframes autoplay4 {
+       0% {height: auto; padding: 0.5em 1em; border: thin solid}
+       33.32% {height: auto; padding: 0.5em 1em; border: thin solid}
+       33.33% {height: 0; padding: 0; border: none}
+       100% {height: 0; padding: 0; border: none}
+     }
+     #pause4:checked ~ * [for=pause4] .timer {animation-play-state: paused}
+   }
+
+   /* Toggle-z-index; abspos to put the slides in the same place.
+      Requires a known maximum height for slides.
+      Requires knowing the number of slides.
+      All slides are animated individually.
+      Requires that the slideset frame has an opaque background.
+      No transition effect.
+   */
+   #pause5, #pause5 ~ * [for=pause5] {display: none}
+   @supports (animation-play-state: paused) {
+     #pause5 ~ * [for=pause5] {display: inline}
+     #pause5 ~ * [for=pause5] .paused {display: none}
+     #pause5 ~ * [for=pause5] .running {display: inline}
+     #pause5:checked ~ * [for=pause5] .paused {display: inline}
+     #pause5:checked ~ * [for=pause5] .running {display: none}
+     #pause5:checked ~ #slideset5 > * {animation-play-state: paused}
+     #slideset5 {height: 10em; position: relative; background: white}
+     #slideset5 > * {animation: 12s autoplay5 infinite;
+       position: absolute; top: 0; left: 0; z-index: -1}
+     #slideset5 > *:nth-child(1) {animation-delay: 0s}
+     #slideset5 > *:nth-child(2) {animation-delay: 4s}
+     #slideset5 > *:nth-child(3) {animation-delay: 8s}
+     @keyframes autoplay5 {
+       0% {z-index: 0}
+       33.32% {z-index: 0}
+       33.33% {z-index: -1}
+     }
+     #pause5:checked ~ * [for=pause5] .timer {animation-play-state: paused}
+   }
+
+   /* Toggling 'opacity; abspos for putting the slides in the same place.
+      Requires a known maximum height for slides.
+      Requires knowing the number of slides.
+      All slides are animated individually.
+      With transition effect.
+   */
+   #pause6, #pause6 ~ * [for=pause6] {display: none}
+   @supports (animation-play-state: paused) {
+     #pause6 ~ * [for=pause6] {display: inline}
+     #pause6 ~ * [for=pause6] .paused {display: none}
+     #pause6 ~ * [for=pause6] .running {display: inline}
+     #pause6:checked ~ * [for=pause6] .paused {display: inline}
+     #pause6:checked ~ * [for=pause6] .running {display: none}
+     #pause6:checked ~ #slideset6 > * {animation-play-state: paused}
+     #slideset6 {height: 10em; position: relative}
+     #slideset6 > * {animation: 12s autoplay6 infinite linear;
+       position: absolute; top: 0; left: 0; opacity: 0.0}
+     #slideset6 > *:nth-child(1) {animation-delay: 0s}
+     #slideset6 > *:nth-child(2) {animation-delay: 4s}
+     #slideset6 > *:nth-child(3) {animation-delay: 8s}
+     @keyframes autoplay6 {
+       0% {opacity: 0.0}
+       4% {opacity: 1.0}
+       33.33% {opacity: 1.0}
+       37.33% {opacity: 0.0}
+       100% {opacity: 0.0}
+     }
+     #pause6:checked ~ * [for=pause6] .timer {animation-play-state: paused}
+   }
+
+   /* Toggle position between absolute (off screen) and static.
+      Does not require a known height for slides.
+      Requires knowing the number of slides.
+      All slides are animated individually.
+      No transition effect.
+      Works in Gecko and Blink, but 'position' is officially not animatable.
+   */
+   #pause7, #pause7 ~ * [for=pause7] {display: none}
+   @supports (animation-delay: 4s) {
+     #pause7 ~ * [for=pause7] {display: inline}
+     #pause7 ~ * [for=pause7] .paused {display: none}
+     #pause7 ~ * [for=pause7] .running {display: inline}
+     #pause7:checked ~ * [for=pause7] .paused {display: inline}
+     #pause7:checked ~ * [for=pause7] .running {display: none}
+     #pause7:checked ~ #slideset7 > * {animation-play-state: paused}
+     #slideset7 > * {animation: 12s autoplay7 infinite;
+       position: absolute; left: -10000px}
+     #slideset7 > *:nth-child(1) {animation-delay: 0s}
+     #slideset7 > *:nth-child(2) {animation-delay: 4s}
+     #slideset7 > *:nth-child(3) {animation-delay: 8s}
+     @keyframes autoplay7 {
+       0% {position: static}
+       33.33% {position: static}
+       33.34% {position: absolute}
+       100% {position: absolute}
+     }
+     #pause7:checked ~ * [for=pause7] .timer {animation-play-state: paused}
+   }
+
+   /* Just for fun, add a rotating "clock" when an animation is running. */
+   .running, .paused {border: thin outset #CCC; padding: 0.2em 0.6em;
+     background: #CCC}
+   .timer {display: inline-block; position: relative; width: 1.2em;
+     height: 1.2em; vertical-align: bottom;
+     background: top center / 15% 50% linear-gradient(#FFF,#FFF) no-repeat,
+       center radial-gradient(closest-side,#396,#396 100%,transparent);
+     animation: 4s turn infinite linear}
+   @keyframes turn {
+     0% {transform: rotate(0turn)}
+     100% {transform: rotate(1turn)}
+   }
+
+   /* Some other styles to make this page look nice. */
+   table {border-collapse: collapse; margin: 1.2em auto}
+   tr {vertical-align: baseline}
+   tbody tr {border-top: thin dotted}
+   th, td {text-align: center; padding: 0.3em 0.5em}
+   th:first-child {text-align: left}
+
+   /* Give our examples some space and each "slide" a color and a border. */
+   div.example {margin: 1.3em 1.5em}
+   div.example div div {color: #396; padding: 0.5em 1em; border: thin solid;
+     border-radius: 0.5em}
+  </style>
+  <link href="https://www.w3.org/Style/Examples/007/slideshow.en.html" hreflang="en" rel="alternate" title="English">
+  <link href="https://www.w3.org/Style/Examples/007/Overview.en" rel="up" title="CSS: tips &amp; tricks">
+  <link href="https://www.w3.org/Style/Examples/007/figures.en" rel="first" title="CSS: figures &amp; captions">
+  <link href="https://www.w3.org/Style/Examples/007/sliding.en" rel="prev" title="CSS: a sliding menu">
+  <link href="https://www.w3.org/Style/Examples/007/slideshow.en" rel="last" title="CSS: Using animation for automatic slideshows">
+
+ </head><body>
+  <h1><em>Web Style Sheets</em> CSS tips &amp; tricks</h1>
+
+  <div class="section" id="intro">
+   <p>See also the <a href="https://www.w3.org/Style/Examples/007/">index</a> of all tips.
+  </p></div>
+
+  <div class="section" id="autoplay">
+   <h2>Using animation for automatic slideshows</h2>
+
+   <p>One of the things you can do with the 'animation' property of
+    CSS is show a series of slides as a slideshow that plays
+    automatically, i.e., it shows one slide for a few seconds, then the
+    next slide for a few seconds, etc.
+
+   </p><p>In the examples below, the slideshow repeats indefinitely. After
+    the last slide the first one is shown again. But showing each slide
+    only once is just as easy.
+
+   </p><p>The slides in my examples are DIV elements with content.
+    Together they are contained in another DIV element with an ID
+    attribute. It is not necessary to use DIV elements. Almost any
+    other element will do, as long as each slide is one element. Here
+    is the slide set I will be using:
+
+   </p><pre>&lt;div id=slideset1&gt;
+  &lt;div&gt;
+    &lt;h1&gt;This is slide 1&lt;/h1&gt;
+    &lt;p&gt;Slide 1
+    &lt;p&gt;It has a &lt;a href="./"&gt;link.&lt;/a&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;h1&gt;This is the second slide&lt;/h1&gt;
+    &lt;p&gt;Second slide
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;h1&gt;This is slide number 3&lt;/h1&gt;
+    &lt;p&gt;Slide number 3
+  &lt;/div&gt;
+&lt;/div&gt;</pre>
+
+   <p>You can give each slide a style (for these example I just made
+    them green and gave them a green border). Although depending on the
+    method used to animate the slides, there may be some restrictions
+    on what styles you can use.
+
+   </p><p>Below are six different methods to make a slideshow. Each uses
+    different CSS properties to hide and show the slides. Here is an
+    overview of the main characteristics of each method:
+
+   </p><table>
+    <thead>
+     <tr>
+      <th>
+
+      </th><th><a href="#visibility">#1</a>
+
+      </th><th><a href="#top">#2</a>
+
+      </th><th><a href="#margin-top">#3</a>
+
+      </th><th><a href="#height">#4</a>
+
+      </th><th><a href="#z-index">#5</a>
+
+      </th><th><a href="#opacity">#6</a>
+
+    </th></tr></thead><tbody>
+     <tr>
+      <th>Main property
+
+      </th><td>visibility
+
+      </td><td>top
+
+      </td><td>margin-top
+
+      </td><td>height
+
+      </td><td>z-index
+
+      </td><td>opacity
+
+     </td></tr><tr>
+      <th>Requires a known maximum height?
+
+      </th><td>yes
+
+      </td><td>yes
+
+      </td><td>yes
+
+      </td><td>no
+
+      </td><td>yes
+
+      </td><td>yes
+
+     </td></tr><tr>
+      <th>Requires the same height for all slides?
+
+      </th><td>no
+
+      </td><td>no
+
+      </td><td>yes
+
+      </td><td>no
+
+      </td><td>no
+
+      </td><td>no
+
+     </td></tr><tr>
+      <th>Requires knowing the number of slides?
+
+      </th><td>yes
+
+      </td><td>yes
+
+      </td><td>yes
+
+      </td><td>yes
+
+      </td><td>yes
+
+      </td><td>yes
+
+     </td></tr><tr>
+      <th>Number of animated slides
+
+      </th><td>all
+
+      </td><td>all
+
+      </td><td>1
+
+      </td><td>all
+
+      </td><td>all
+
+      </td><td>all
+
+     </td></tr><tr>
+      <th>Works in Opera 12?
+
+      </th><td>no
+
+      </td><td>no
+
+      </td><td>yes
+
+      </td><td>no
+
+      </td><td>no
+
+      </td><td>no
+
+     </td></tr><tr>
+      <th>Transition effect
+
+      </th><td>-
+
+      </td><td>move
+
+      </td><td>move
+
+      </td><td>-
+
+      </td><td>-
+
+      </td><td>fade
+
+     </td></tr><tr>
+      <th>First slide visible before the start?
+
+      </th><td>yes
+
+      </td><td>no
+
+      </td><td>no
+
+      </td><td>yes
+
+      </td><td>yes
+
+      </td><td>no
+
+     </td></tr><tr>
+      <th>Allows transparent backgrounds?
+
+      </th><td>yes
+
+      </td><td>yes
+
+      </td><td>yes
+
+      </td><td>yes
+
+      </td><td>no
+
+      </td><td>yes
+
+     </td></tr><tr>
+      <th>Repeats without a gap?
+
+      </th><td>yes
+
+      </td><td>yes
+
+      </td><td>no
+
+      </td><td>yes
+
+      </td><td>yes
+
+      </td><td>yes
+   </td></tr></tbody></table>
+  </div>
+
+  <div class="section" id="visibility">
+   <h2>Method 1 – visibility</h2>
+
+   <p>One obvious choice for a property to animate is 'visibility':
+    You set the visibility to visible for the slide to show and to
+    hidden for all others. To make sure all slides are shown in the
+    same place, you can use the 'position' property.
+
+   </p><p>Because the slides are positioned with absolute positioning, if
+    you have some content <em>after</em> the slides, you need to know
+    how much space to reserve. In this case, I know that the largest
+    slide is almost 10em high, so I set the slide set container to
+    10em. The container also needs 'position: relative', so I can
+    position the slides relative to it:
+
+   </p><pre>#slideset1 {height: 10em; position: relative}</pre>
+
+   <p>Each slide (i.e., each child of the slide set container) is
+    initially invisible and is positioned in the top left corner of the
+    container. Each slide has a reference to the animation called
+    ‘autoplay1’, which I will define below. I also set the slideshow to
+    last 12&nbsp;seconds and repeat an infinite number of times. (You can
+    put <code>1</code> for a slide show that does not repeat.)
+
+   </p><pre>#slideset1 &gt; * {visibility: hidden; position: absolute;
+  top: 0; left: 0; animation: 12s autoplay1 infinite}</pre>
+
+   <p>The animation consists of changing the value of 'visibility'. At
+    the start of the animation, the value is set to 'visible'. Since I
+    have three slides, a slide should remain visible for one third of
+    the time and invisible for two thirds, so at 33% into the animation
+    I change the value to 'hidden' again. These rules are grouped in an
+    '@keyframes' rule, like this:
+
+   </p><pre>@keyframes autoplay1 {
+  0% {visibility: visible}
+  33.33% {visibility: hidden}
+}</pre>
+
+   <p>But like this, all three slides animate together and become
+    visible at the same time. I need to stagger the times at which each
+    slide's animation starts. The 'animation-delay' property is
+    designed for that:
+
+   </p><pre>#slideset1 &gt; *:nth-child(1) {animation-delay: 0s}
+#slideset1 &gt; *:nth-child(2) {animation-delay: 4s}
+#slideset1 &gt; *:nth-child(3) {animation-delay: 8s}</pre>
+
+   <p>Here is the result. (For convenience, I added a button to start
+    and pause the animation. That button is explained in <a href="#pausing">‘Pausing the animation’</a> below).
+
+   </p><div class="example"> <input checked="checked" id="pause1" name="pause1" type="checkbox">
+    <div id="slideset1">
+     <div>
+      <h1>This is slide 1</h1>
+
+      <p>Slide 1
+
+      </p><p>It has a <a href="https://www.w3.org/Style/Examples/007/">link.</a>
+     </p></div>
+
+     <div>
+      <h1>This is the second slide</h1>
+
+      <p>Second slide
+     </p></div>
+
+     <div>
+      <h1>This is slide number 3</h1>
+
+      <p>Slide number 3
+     </p></div>
+    </div>
+
+    <p><label for="pause1"><span class="timer"></span> <span class="running">⏸ Pause</span><span class="paused">▶ Play</span></label>
+   </p></div>
+  </div>
+
+  <div class="section" id="top">
+   <h2>Method 2 – top</h2>
+
+   <p>In the previous example, the slides were absolutely positioned
+    inside the container and made transparent. One other way to hide
+    them is to position them outside the container and tell the
+    container to hide content outside itself with 'overflow: hidden'.
+
+   </p><p>In fact, if you move the slides in and out of the container, you
+    can also animate that movement, so you see each slide shift in or
+    out: a nice transition affect. That's what I did in the example
+    below.
+
+   </p><p>The rule for the container element is almost the same as before,
+    with the addition of 'overflow: hidden', so any slides positioned
+    outside the container are not shown:
+
+   </p><pre>#slideset2 {height: 10em; position: relative;
+  overflow: hidden}</pre>
+
+   <p>Each slide is initially positioned just below the bottom left
+    corner. ('100%' means 100% of the height of the container.) And
+    each slide has an animation called ‘autoplay2’, defined below, to
+    change its position over time:
+
+   </p><pre>#slideset2 &gt; * {position: absolute; top: 100%; left: 0;
+  animation: 12s autoplay2 infinite ease-in-out}</pre>
+
+   <p>The 'ease-in-out' determines the acceleration of the movement.
+    It is one of a predefined set of keywords. 'Ease-in-out' means that
+    the movement starts slowly, accelerates, and finally slows down
+    again. Which is what looks best for our purpose.
+
+   </p><p>The animation moves the slide from below the bottom of the
+    container to the top in half a second (4% of 12&nbsp;seconds). The
+    position remains unchanged until one third into the animation. Then
+    the slide moves up in half a second again until it is completely
+    above the container. It remains there until the animation starts
+    over:
+
+   </p><pre>@keyframes autoplay2 {
+  0% {top: 100%}
+  4% {top: 0%}
+  33.33% {top: 0%}
+  37.33% {top: -100%}
+  100% {top: -100%}
+}</pre>
+
+   <p>As before, each of the three slides has to start the animation
+    at a different time:
+
+   </p><pre>#slideset2 &gt; *:nth-child(1) {animation-delay: 0s}
+#slideset2 &gt; *:nth-child(2) {animation-delay: 4s}
+#slideset2 &gt; *:nth-child(3) {animation-delay: 8s}</pre>
+
+   <p>And here is the result. Note that the first slide isn't visible
+    before the animation starts.
+
+   </p><div class="example"> <input checked="checked" id="pause2" name="pause2" type="checkbox">
+    <div id="slideset2">
+     <div>
+      <h1>This is slide 1</h1>
+
+      <p>Slide 1
+
+      </p><p>It has a <a href="https://www.w3.org/Style/Examples/007/">link.</a>
+     </p></div>
+
+     <div>
+      <h1>This is the second slide</h1>
+
+      <p>Second slide
+     </p></div>
+
+     <div>
+      <h1>This is slide number 3</h1>
+
+      <p>Slide number 3
+     </p></div>
+    </div>
+
+    <p><label for="pause2"><span class="timer"></span> <span class="running">⏸ Pause</span><span class="paused">▶ Play</span></label>
+   </p></div>
+  </div>
+
+  <div class="section" id="margin-top">
+   <h2>Method 3 – margin-top</h2>
+
+   <p>The third method animates the 'margin-top' property of the first
+    slide to move the slide into view, then move it up to let the
+    second slide appear, and then up even more to let the following
+    slides move into view.
+
+   </p><p>Only one property of one slide needs to be animated. The other
+    slides are laid out below the first in the normal way and move up
+    when the first one moves up. All the slides need to have the same
+    height, which is also the height of the container DIV. That
+    container has 'overflow: hidden' so that the slides that are above
+    or below it remain invisible.
+
+   </p><p>As before, I set the height of the container to 10em and also
+    set the height of each slide to the same value ('100%'). The slides
+    must not have margins; and nothing, including the border or
+    padding, must extend beyond those 10em:
+
+   </p><pre>#slideset3 {height: 10em; position: relative;
+  overflow: hidden}
+#slideset3 &gt; * {height: 100%; box-sizing: border-box;
+  overflow: hidden}</pre>
+
+   <p>The first slide gets an animation that moves it in half a second
+    (4% of 12&nbsp;seconds) from below the container to the top of the
+    container. About a third into the animation, the slide is moved up
+    another 10em, which causes the second slide to be aligned with the
+    container. A third later, the first slide moves up again. And at
+    the end of the animation it moves a final time, causing the third
+    slide to move out of the top of the container. Then the animation
+    starts over.
+
+   </p><pre>#slideset3 &gt; *:first-child {
+  animation: 12s autoplay3 infinite ease-in-out}
+@keyframes autoplay3 {
+  0% {margin-top: 10em}
+  4% {margin-top: 0em}
+  31% {margin-top: 0em}
+  35% {margin-top: -10em}
+  64% {margin-top: -10em}
+  68% {margin-top: -20em}
+  96% {margin-top: -20em}
+  100% {margin-top: -30em}
+}</pre>
+
+   <div class="example"> <input checked="checked" id="pause3" name="pause3" type="checkbox">
+    <div id="slideset3">
+     <div>
+      <h1>This is slide 1</h1>
+
+      <p>Slide 1
+
+      </p><p>It has a <a href="https://www.w3.org/Style/Examples/007/">link.</a>
+     </p></div>
+
+     <div>
+      <h1>This is the second slide</h1>
+
+      <p>Second slide
+     </p></div>
+
+     <div>
+      <h1>This is slide number 3</h1>
+
+      <p>Slide number 3
+     </p></div>
+    </div>
+
+    <p><label for="pause3"><span class="timer"></span> <span class="running">⏸ Pause</span><span class="paused">▶ Play</span></label>
+   </p></div>
+
+   <p>Note that there is a little ‘gap’ in the animation when it
+    starts over. First the slides move out of the top in about half a
+    second and then they move back in from the bottom. So there is a
+    moment when the container is empty of slides. That is unlike the
+    previous method, where the first slide starts moving in when the
+    last slide is still moving out.
+  </p></div>
+
+  <div class="section" id="height">
+   <h2>Method 4 – height</h2>
+
+   <p>A way to make an element invisible is also to remove its border
+    and padding and set its height to zero. If its 'overflow' property
+    is also set to 'hidden', the element is completely invisible.
+
+   </p><p>In this case you do not need to know the maximum height of the
+    slides in advance. The animation just toggles the height between 0
+    and 'auto'.
+
+   </p><p>However, if different slides have different heights, if means
+    that any content after the slides moves along with the slides. You
+    can see that happening in the example below. Whether that is an
+    issue or a feature depends on what comes after the slides…
+
+   </p><p>The following rule gives each slide an animation and sets
+    'overflow' to 'hidden', so that no contents shows once its height
+    is set to 0.
+
+   </p><pre>#slideset4 &gt; * {animation: 12s autoplay4 infinite;
+  overflow: hidden}</pre>
+
+   <p>The animation in this case starts by setting the height to
+    'auto' and adding the desired padding and border. At one third into
+    the animation, the height is set to 0 and the border and padding
+    are removed in a fraction of a second. They remain zero until the
+    end of the animation.
+
+   </p><pre>@keyframes autoplay4 {
+  0% {height: auto; padding: 0.5em 1em; border: thin solid}
+  33.32% {height: auto; padding: 0.5em 1em; border: thin solid}
+  33.33% {height: 0; padding: 0; border: none}
+  100% {height: 0; padding: 0; border: none}
+}</pre>
+
+   <p>As in earlier methods, the animations of each slide are
+    staggered in time. However, we do not delay their start in this
+    case, because then all slides would be visible until the animations
+    hide them. Instead, we start the animations of the second and third
+    slides immediately, but partway into the animation. The second
+    slide is started two-thirds into the animation (as if it had
+    already done 8 of the 12&nbsp;seconds). And the third slide is started
+    one-third into the animation.
+
+   </p><pre>#slideset4 &gt; *:nth-child(1) {animation-delay: 0s}
+#slideset4 &gt; *:nth-child(2) {animation-delay: -8s}
+#slideset4 &gt; *:nth-child(3) {animation-delay: -4s}</pre>
+
+   <div class="example"> <input checked="checked" id="pause4" name="pause4" type="checkbox">
+    <div id="slideset4">
+     <div>
+      <h1>This is slide 1</h1>
+
+      <p>Slide 1
+
+      </p><p>It has a <a href="https://www.w3.org/Style/Examples/007/">link.</a>
+     </p></div>
+
+     <div>
+      <h1>This is the second slide</h1>
+
+      <p>Second slide
+     </p></div>
+
+     <div>
+      <h1>This is slide number 3</h1>
+
+      <p>Slide number 3
+     </p></div>
+    </div>
+
+    <p><label for="pause4"><span class="timer"></span> <span class="running">⏸ Pause</span><span class="paused">▶ Play</span></label>
+   </p></div>
+  </div>
+
+  <div class="section" id="z-index">
+   <h2>Method 5 – z-index</h2>
+
+   <p>The fifth method uses the 'z-index' property to put the slides
+    either in front of or behind the container. If the container is
+    opaque, that means the slides that are behind it are invisible.
+
+   </p><p>The container needs to be big enough to hide the biggest of the
+    slides. I know that my slides are no more than 10em in height, so I
+    set the container to that height. It gets a 'position: relative' so
+    that the slides can be positioned inside it and a background to
+    make it opaque. In this case I made the background white, to blend
+    in with the rest of the page.
+
+   </p><pre>#slideset5 {height: 10em; position: relative;
+  background: white}</pre>
+
+   <p>I position each slide at the top left in the container, but with
+    a negative 'z-index', to put it behind the container's background.
+
+   </p><pre>#slideset5 &gt; * {animation: 12s autoplay5 infinite;
+  position: absolute; top: 0; left: 0; z-index: -1}</pre>
+
+   <p>The animation is simple. It just toggles the 'z-index' between 0
+    (putting the slide in front of the parent container) and -1 (behind
+    it). For one third of the time, the 'z-index' is 0, until a
+    fraction of a second before the one-third mark, and then it becomes
+    -1, until the animation repeats.
+
+   </p><pre>@keyframes autoplay5 {
+  0% {z-index: 0}
+  33.32% {z-index: 0}
+  33.33% {z-index: -1}
+}</pre>
+
+   <p>As before, we start the animations at a different time for each
+    slide:
+
+   </p><pre>#slideset5 &gt; *:nth-child(1) {animation-delay: 0s}
+#slideset5 &gt; *:nth-child(2) {animation-delay: 4s}
+#slideset5 &gt; *:nth-child(3) {animation-delay: 8s}</pre>
+
+   <p>And here is the result:
+
+   </p><div class="example"> <input checked="checked" id="pause5" name="pause5" type="checkbox">
+    <div id="slideset5">
+     <div>
+      <h1>This is slide 1</h1>
+
+      <p>Slide 1
+
+      </p><p>It has a <a href="https://www.w3.org/Style/Examples/007/">link.</a>
+     </p></div>
+
+     <div>
+      <h1>This is the second slide</h1>
+
+      <p>Second slide
+     </p></div>
+
+     <div>
+      <h1>This is slide number 3</h1>
+
+      <p>Slide number 3
+     </p></div>
+    </div>
+
+    <p><label for="pause5"><span class="timer"></span> <span class="running">⏸ Pause</span><span class="paused">▶ Play</span></label>
+   </p></div>
+  </div>
+
+  <div class="section" id="opacity">
+   <h2>Method 6 – opacity</h2>
+
+   <p>The sixth method uses the 'opacity' property to make slides
+    invisible. The opacity is a number between 0 (fully transparent)
+    and 1 (fully opaque) and so it can also be used for a transition
+    effect: slides fade in and fade out.
+
+   </p><p>The slides are all positioned in the same place, with absolute
+    positioning, and so I also need to reserve enough space. In this
+    case I know that the biggest is 10em tall. So here is the rule for
+    the container DIV:
+
+   </p><pre>#slideset6 {height: 10em; position: relative}</pre>
+
+   <p>Each slide is positioned in the container and gets an 'opacity'
+    of 0, i.e., it is fully transparent (invisible).
+
+   </p><pre>#slideset6 &gt; * {animation: 12s autoplay6 infinite linear;
+  position: absolute; top: 0; left: 0; opacity: 0.0}</pre>
+
+   <p>For this animation I chose a linear progression, instead of the
+    'ease-in-out' I used in some other methods. For the fading effect I
+    think it looks better.
+
+   </p><p>The animation changes the opacity from 0 to 1 in half a second,
+    and, 3½ seconds later, changes it back to 0, again in half a second
+    (between 33.33% and 37.33%):
+
+   </p><pre>@keyframes autoplay6 {
+  0% {opacity: 0.0}
+  4% {opacity: 1.0}
+  33.33% {opacity: 1.0}
+  37.33% {opacity: 0.0}
+  100% {opacity: 0.0}
+}</pre>
+
+   <p>As before, each slide starts its animation 4 seconds after the
+    preceding slide. That means each slide starts fading in exactly as
+    the previous slide starts fading out. (33.33% of 12&nbsp;seconds is
+    4&nbsp;seconds.)
+
+   </p><pre>#slideset6 &gt; *:nth-child(1) {animation-delay: 0s}
+#slideset6 &gt; *:nth-child(2) {animation-delay: 4s}
+#slideset6 &gt; *:nth-child(3) {animation-delay: 8s}</pre>
+
+   <div class="example"> <input checked="checked" id="pause6" name="pause6" type="checkbox">
+    <div id="slideset6">
+     <div>
+      <h1>This is slide 1</h1>
+
+      <p>Slide 1
+
+      </p><p>It has a <a href="https://www.w3.org/Style/Examples/007/">link.</a>
+     </p></div>
+
+     <div>
+      <h1>This is the second slide</h1>
+
+      <p>Second slide
+     </p></div>
+
+     <div>
+      <h1>This is slide number 3</h1>
+
+      <p>Slide number 3
+     </p></div>
+    </div>
+
+    <p><label for="pause6"><span class="timer"></span> <span class="running">⏸ Pause</span><span class="paused">▶ Play</span></label>
+   </p></div>
+  </div>
+
+  <div class="section" id="pausing">
+   <h2>Pausing the animation</h2>
+
+   <p>If something moves in a page, it is always a good idea to
+    provide a way to make it stop. The reader may want more time to
+    look at something before it disappears. Indeed, being able to stop
+    animations is one of W3C's accessibility guidelines.
+
+   </p><p>Stopping a CSS animation is done with a property called
+    'animation-play-state'. It has two values, 'running' (the default)
+    and 'paused'. The trick is to add a checkbox to the page and set
+    the property to 'paused', only if the user checked that box.
+
+   </p><p>The property has to apply to the slides. So to be able to make a
+    selector that selects a slide based on whether there is a checked
+    checkbox in its context, the checkbox has to come before the
+    slides. The markup with the checkbox added could look like this:
+
+   </p><pre>&lt;input type=checkbox name=pause1 id=pause1 checked&gt;
+&lt;div id=slideset1&gt;
+ &lt;div&gt;
+  &lt;h1&gt;This is slide 1&lt;/h1&gt;
+  &lt;p&gt;Slide 1&lt;/p&gt;
+  &lt;p&gt;It has a &lt;a href="./"&gt;link.&lt;/a&gt;&lt;/p&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;h1&gt;This is the second slide&lt;/h1&gt;
+  &lt;p&gt;Second slide&lt;/p&gt;
+ &lt;/div&gt;
+ &lt;div&gt;
+  &lt;h1&gt;This is slide number 3&lt;/h1&gt;
+  &lt;p&gt;Slide number 3&lt;/p&gt;
+ &lt;/div&gt;
+&lt;/div&gt;</pre>
+
+   <p>And the CSS rule to stop the animation looks like this:
+
+   </p><pre>#pause1:checked ~ #slideset1 &gt; * {
+  animation-play-state: paused}</pre>
+
+   <p>It selects all slides in slideset1 if that slideset follows the
+    pause1 element and that pause1 element is currently checked.
+
+   </p><p>If having a checkbox above the slides is not desirable, you can
+    hide the checkbox and put a LABEL element somewhere else. The LABEL
+    can be put anywhere. It is linked to the checkbox by its FOR
+    attribute.
+
+   </p><p>In the examples above, I put a label after the slides and hid
+    the checkbox, with a rule like this:
+
+   </p><pre>#pause1 {display: none}</pre>
+
+   <p>I also wanted the label to be different depending on whether the
+    animation was running or paused. So I gave the label two different
+    contents (two SPAN elements), only one of which is shown at a time:
+
+   </p><pre>&lt;p&gt;&lt;label for=pause1&gt;&lt;span class=running&gt;⏸
+   Pause&lt;/span&gt;&lt;span class=paused&gt;▶ Play&lt;/span&gt;&lt;/label&gt;</pre>
+
+   <p>That does, however, restrict a bit where you can put the LABEL,
+    because it has to be possible to write a selector that selects the
+    checkbox and the label. My LABEL element is inside a P that is a
+    sibling of the checkbox, and my rules look like this:
+
+   </p><pre>#pause1 ~ * [for=pause1] .paused {display: none}
+#pause1 ~ * [for=pause1] .running {display: inline}
+#pause1:checked ~ * [for=pause1] .running {display: none}
+#pause1:checked ~ #slideset1 &gt; * {animation-play-state: paused}</pre>
+  </div>
+
+  <div class="section" id="more">
+   <h2>More</h2>
+
+   <p>You can also see a rotating dial next to each pause button. I
+    added that because it looks interesting and it shows that an
+    animation is in progress, even if the slide is currently not
+    moving. I will not explain how it works here, but you can study the
+    source of this page.
+
+   </p><p>When you do that, you will also see that most of the CSS rules
+    are enclosed in a block '@supports (animation-delay: 4s) {…}'. That
+    is to hide the rules relating to animations from browsers and other
+    CSS renderers that do not implement animation. The slides will not
+    look good, or may be completely invisible, if some of the CSS
+    properties are applied, but not the animation itself.
+
+   </p><p>By that means I also hid the LABEL with the play/pause button
+    from implementations that do not do animations, because the button
+    serves no purpose in that case.
+  </p></div>
+
+  <div class="section" id="banner">
+   <h2>Site navigation</h2>
+
+   <form action="../../../Help/search">
+    <ul>
+     <li class="home"><a href="https://www.w3.org/" rel="home"><img alt="W3C" src="CSS%20Using%20animation%20for%20automatic%20slideshows_fichiers/w3c_home.svg"></a>
+
+     </li><li><a href="https://www.w3.org/Style/CSS/">CSS home</a>
+
+     </li><li><a href="https://www.w3.org/Style/CSS/learning">Learn &amp; use</a>
+
+     </li><li><a href="https://www.w3.org/Style/CSS/software">Soft­ware</a>
+
+     </li><li><a href="https://www.w3.org/Style/CSS/current-work" title="Participate in the development of the CSS standard">Par­tic­i­pate / <span title="All specifications and drafts">drafts</span></a>
+
+     </li><li class="search"><input accesskey="E" id="inputField" maxlength="255" name="q" size="10"><button accesskey="G" name="sa" type="submit"><img alt="Search" src="CSS%20Using%20animation%20for%20automatic%20slideshows_fichiers/search-button.png" title="Search"></button>
+    </li></ul>
+   </form>
+  </div>
+
+  <div class="section" id="endmatter">
+   <address class="vcard h-card"><img alt="" class="photo u-photo" src="CSS%20Using%20animation%20for%20automatic%20slideshows_fichiers/bert3-small.jpg"> <a class="fn url p-name u-url" href="https://www.w3.org/People/Bos/">Bert
+    Bos</a>, <span class="role p-role">style activity lead</span><br>
+    <small><a href="https://www.w3.org/Consortium/Legal/ipr-notice#Copyright" rel="copyright">Copyright</a> © <!--@@@-->1994–2021<!--/@@@--> <a href="https://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr><sup>®</sup></a></small> <a href="https://www.w3.org/Consortium/Legal/ipr-notice">Privacy policy</a></address>
+
+   <p>Created 27 March 2011;<br>
+    Last updated <!--@@@-->Wed 06 Jan 2021 05:40:49 AM UTC<!--/@@@-->
+  </p></div>
+
+  <div class="section" id="translations">
+   <h2>Languages</h2>
+
+   <p><a href="https://www.w3.org/Style/CSS/translating">About the translations</a>
+  </p></div>
+<div style="position: static !important;"></div></body></html>
