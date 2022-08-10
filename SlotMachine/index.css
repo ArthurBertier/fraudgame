@@ -1,0 +1,354 @@
+/* const skyDark = {
+    sky1: 'hsl(205, 45.0%, 8.6%)',
+    sky2: 'hsl(202, 71.4%, 9.6%)',
+    sky3: 'hsl(201, 74.6%, 12.2%)',
+    sky4: 'hsl(201, 77.4%, 14.4%)',
+    sky5: 'hsl(200, 80.3%, 16.5%)',
+    sky6: 'hsl(200, 84.1%, 18.9%)',
+    sky7: 'hsl(199, 90.2%, 22.1%)',
+    sky8: 'hsl(198, 100%, 26.1%)',
+    sky9: 'hsl(193, 98.0%, 70.0%)',
+    sky10: 'hsl(192, 100%, 77.0%)',
+    sky11: 'hsl(192, 85.0%, 55.8%)',
+    sky12: 'hsl(198, 98.0%, 95.8%)',
+  }
+  const slateDark = {
+    slate1: 'hsl(200, 7.0%, 8.8%)',
+    slate2: 'hsl(195, 7.1%, 11.0%)',
+    slate3: 'hsl(197, 6.8%, 13.6%)',
+    slate4: 'hsl(198, 6.6%, 15.8%)',
+    slate5: 'hsl(199, 6.4%, 17.9%)',
+    slate6: 'hsl(201, 6.2%, 20.5%)',
+    slate7: 'hsl(203, 6.0%, 24.3%)',
+    slate8: 'hsl(207, 5.6%, 31.6%)',
+    slate9: 'hsl(206, 6.0%, 43.9%)',
+    slate10: 'hsl(206, 5.2%, 49.5%)',
+    slate11: 'hsl(206, 6.0%, 63.0%)',
+    slate12: 'hsl(210, 6.0%, 93.0%)',
+  } */
+  /* #test {
+    width: 100vh;
+    padding: 2em 0;
+    background: #c14545; */
+    /* visibility: hidden; */
+  /* }
+  #box {
+    border: chartreuse 10px solid;
+position: absolute;
+    height: 50vh;
+    z-index: 1;
+
+  }
+  #test {
+    z-index: 10;
+    padding: 2em 0;
+    background: #c14545;
+    visibility: hidden;
+  }
+  
+  .slideDown{
+        animation: example 1s infinite linear;
+        visibility: visible !important;						
+
+         */
+  /* } */
+ #machine {
+   display: flex;
+   flex-direction: row;
+ }
+ #chips {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+  /* @keyframes example {
+    0% {
+      top: -50px;
+      background: black;
+    }
+    100% {
+      top: 100px;
+      top: white;
+    }
+  } */
+ 
+ 
+  
+  * {
+    /* background-color:hsl(205, 45.0%, 8.6%); */
+    color:hsl(178, 98.0%, 95.8%) ;
+  }
+button {
+  background-color:hsl(205, 45.0%, 8.6%);
+
+}
+  .subtle {
+    color:hsl(210, 6.0%, 93.0%) ;
+  }
+
+  .cards0 {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    /* background-color: hsl(193, 98.0%, 70.0%); */
+
+  }
+  .cards1 {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    /* background-color: hsl(193, 98.0%, 70.0%); */
+
+  }
+  #animation {
+    animation: example1 2s  linear;
+    animation-iteration-count: 1;
+
+  }
+  #animation1 {
+    animation: example1 2s 3 linear;
+
+  }
+  #animation2 {
+    animation: example1 2s 2 linear;
+
+  }
+
+  .cards2 {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    /* background-color: hsl(193, 98.0%, 70.0%); */
+
+  }
+
+  .cards:hover {
+    background-color: hsl(192, 100%, 77.0%);
+  }
+#title {
+align-self:auto;
+}
+#container {
+  background-color:hsl(205, 45.0%, 8.6%);
+  display: flex;
+  height: 98vh;
+  width: 100vw;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+  #bigBox {
+    overflow:hidden;
+    display: flex;
+    height: 60vh;
+    width: 80vh;
+    background-color: green;
+    border: orange outset  8px;
+    border-radius: 10%;
+    justify-content: flex-start;
+    /* box-shadow: 5px 5px 25px 0px rgba(225, 48, 139, 1.5); */
+  }
+
+  #littleBox {
+    overflow: hidden;
+
+    /* display: flex;
+    justify-content : center;
+    flex-direction: column;
+    align-items: flex-start; */
+    background-color: transparent;
+    border-right: orange 3px solid;
+    height: 100%;
+    width: 100%;
+
+  }
+  #littleBox2 {
+    overflow: hidden;
+    /* display: flex;
+    flex-direction: column;
+
+
+    justify-content : center;
+    align-items: flex-start; */
+    background-color: transparent;
+    border-right: orange 3px solid;
+    height: 100%;
+    width: 100%;
+
+  }
+
+  #background-video {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+  }
+
+  #littleBox3 {
+    overflow: hidden;
+    /* display: flex;
+
+
+    flex-direction: column;
+    justify-content : center;
+    align-items: flex-start; */
+    background-color: transparent;
+
+    height: 100%;
+    width: 100%;
+  }
+
+  img {
+    overflow: hidden;
+    position: relative;
+    height: 100px;
+  }
+
+  @keyframes example1 {
+    0% {
+      top: 100px;
+    }
+
+    10% {
+      top: -100px;
+
+    }
+    20%{
+      top: -300px;
+
+    }
+    30% {
+      top: -500px;
+    }
+
+    40% {
+      top: -700px;
+
+    }
+    50%{
+      top: -900px;
+
+    }  6% {
+      top: -1100px;
+    }
+
+    70% {
+      top: -1200px;
+
+    }
+    80%{
+      top: -1300px;
+
+    }
+    100% {
+      top: -1500px;
+
+    }
+  }
+  
+
+
+  .chip {
+    height: 140px;
+    width: 140px;
+    border-radius: 50%;
+    border: 7px dashed white;
+    transition: all 1s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: 'Lato', sans-serif;
+    font-size: 26px;
+    margin: 0px 8px;
+  }
+  #by5 {
+background-color: #073d91;
+  }
+  #by10 {
+    background-color: #32a9f1;
+  }
+  #by15 {
+    background-color: orange;
+  }
+  div span {
+    border: 3px dashed white;
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 120px;
+  }
+  
+
+  .wrapper {
+    position: relative;
+    display: inline-block;
+    margin: 35px auto;
+  }
+
+
+#spin-btn {
+  width: 60px;
+  height: 30px;
+  position: absolute;
+  left: -200px;
+}
+
+button {
+  position: absolute;
+  width: 250px;
+  height: 50px;
+  margin: 0 auto;
+  vertical-align: middle;  
+}
+
+#start{
+  border-radius: 100em;
+  
+}
+#start:before {
+  border-radius: 100em;
+  left: 2px;
+  top: 1px;
+}
+
+.left-wrapper {
+  position: relative;
+  left:  30%;
+  transform: translatex(-220px);
+  width: 120px;
+  height: 200px;
+  padding: 0 12px 0 13px;
+  margin-right: 5px;
+  background: #093028;
+  border: 4px outset #ddd;
+  border-radius: 15px;
+  color: #ccc;
+  line-height: 36px;
+  text-align: center;}
+
+  #FUCK {
+    left:  30%;
+    transform: translatex(220px);
+
+  }
